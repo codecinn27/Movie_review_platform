@@ -1,0 +1,49 @@
+# .NET / ASP.NET Core
+bin/
+obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.vs/
+*.vscode/
+
+# Rider IDE
+.idea/
+
+# Visual Studio Code
+.vscode/
+
+# ASP.NET Core generated files
+appsettings.*.json
+launchSettings.json
+
+# NuGet packages
+*.nupkg
+*.snupkg
+packages/
+.nuget/
+
+# Logs
+*.log
+logs/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# PDF files
+*.pdf
+
+# Publish output
+publish/
+wwwroot/
+
+# Entity Framework
+*.db
+*.mdf
+*.ldf
+
+# Node / frontend
+node_modules/
+dist/

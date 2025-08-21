@@ -1,0 +1,6 @@
+@p3_movie_platform_HostAddress = http://localhost:5106
+
+GET {{p3_movie_platform_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
