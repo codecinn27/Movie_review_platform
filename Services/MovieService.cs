@@ -14,8 +14,17 @@ namespace MovieAPI.Services
             _context = context;
         }
 
-        public async Task<IEnumerable<MovieDto>> GetAllMoviesAsync()
+        public async Task<PaginatedResponse<MovieDto>> GetAllMoviesAsync(PaginationParams paginationParams)
         {
+
+            // Get total count first
+            var totalCount = await _context.Movies.CountAsync();
+
+            // Calculate pagination info
+            var totalPages = (int)Math.Ceiling((double)totalCount / paginationParams.PageSize);
+            var skip = (paginationParams.Page - 1) * paginationParams.PageSize;
+
+
             // query Movies from DbContext and project to MovieDto
             var movies = await _context.Movies
                 .Select(m => new MovieDto
@@ -39,7 +48,24 @@ namespace MovieAPI.Services
                 })
                 .ToListAsync();
 
-            return movies;
+             return new PaginatedResponse<MovieDto>
+            {
+                Data = movies,
+                Page = paginationParams.Page,
+                PageSize = paginationParams.PageSize,
+                TotalCount = totalCount,
+                TotalPages = totalPages,
+                HasNextPage = paginationParams.Page < totalPages,
+                HasPreviousPage = paginationParams.Page > 1
+            };
+        }
+
+        // Overload to maintain backward compatibility
+        public async Task<IEnumerable<MovieDto>> GetAllMoviesAsync()
+        {
+            var paginationParams = new PaginationParams { Page = 1, PageSize = 50 };
+            var result = await GetAllMoviesAsync(paginationParams);
+            return result.Data;
         }
 
         public async Task DeleteMovieAsync(Guid id)
@@ -58,23 +84,35 @@ namespace MovieAPI.Services
         public async Task<MovieResponseDto> CreateMovieAsync(CreateMovieDto dto)
         {
 
-            // Check if a movie with the same title already exists
-            if (await _context.Movies.AnyAsync(m => m.Title == dto.Title))
-            {
-                throw new Exception("Movie title already exists. Please choose a different title.");
-            }
+            // Normalize title for consistent comparison
+            var normalizedTitle = dto.Title.Trim();
 
             var movie = new Movie
             {
                 Id = Guid.NewGuid(),
-                Title = dto.Title,
+                Title = normalizedTitle, // Use normalized title
                 Description = dto.Description,
-                // if dto.ReleaseDate is null, default to UTC+8
+                // If dto.ReleaseDate is null, default to UTC+8
                 ReleaseDate = dto.ReleaseDate ?? DateTime.UtcNow.AddHours(8)
             };
 
-            _context.Movies.Add(movie);
-            await _context.SaveChangesAsync();
+            try
+            {
+                _context.Movies.Add(movie);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException ex)
+            {
+                // Check if it's a duplicate key constraint violation
+                if (ex.InnerException?.Message.Contains("Duplicate entry") == true ||
+                    ex.InnerException?.Message.Contains("duplicate key") == true)
+                {
+                    throw new InvalidOperationException($"Movie title '{normalizedTitle}' already exists. Please choose a different title.");
+                }
+                
+                // Re-throw if it's a different kind of database error
+                throw;
+            }
 
             return new MovieResponseDto
             {

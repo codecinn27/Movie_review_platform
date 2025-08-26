@@ -31,7 +31,7 @@ namespace MovieAPI.AppDataContext
                 entity.HasKey(x => x.Id);
 
                // Add unique constraint for Title
-                entity.HasIndex(m => m.Title).IsUnique();
+                entity.HasIndex(m => m.Title).IsUnique().HasDatabaseName("IX_Movies_Title_Unique"); 
             });
 
             modelBuilder.Entity<Review>(entity =>

@@ -82,6 +82,7 @@ var app = builder.Build();
     var context = scope.ServiceProvider; 
 }
 
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

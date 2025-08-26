@@ -1,0 +1,22 @@
+[
+  { "title": "Stellar 1", "description": "Sci-fi adventure in deep space", "releaseDate": "2010-01-01" },
+  { "title": "Stellar 2", "description": "Exploration of new worlds", "releaseDate": "2010-02-01" },
+  { "title": "Stellar 3", "description": "Journey to a distant galaxy", "releaseDate": "2010-03-01" },
+  { "title": "Stellar 4", "description": "Mission to save Earth", "releaseDate": "2010-04-01" },
+  { "title": "Stellar 5", "description": "Interstellar diplomacy challenges", "releaseDate": "2010-05-01" },
+  { "title": "Stellar 6", "description": "Survival on a hostile planet", "releaseDate": "2010-06-01" },
+  { "title": "Stellar 7", "description": "Time travel adventures", "releaseDate": "2010-07-01" },
+  { "title": "Stellar 8", "description": "Alien encounters and discoveries", "releaseDate": "2010-08-01" },
+  { "title": "Stellar 9", "description": "Space station emergencies", "releaseDate": "2010-09-01" },
+  { "title": "Stellar 10", "description": "Galactic exploration missions", "releaseDate": "2010-10-01" },
+  { "title": "Stellar 11", "description": "Lost in an unknown universe", "releaseDate": "2010-11-01" },
+  { "title": "Stellar 12", "description": "First contact with aliens", "releaseDate": "2010-12-01" },
+  { "title": "Stellar 13", "description": "Mysteries of a black hole", "releaseDate": "2011-01-01" },
+  { "title": "Stellar 14", "description": "Exploring wormholes", "releaseDate": "2011-02-01" },
+  { "title": "Stellar 15", "description": "Colonizing new planets", "releaseDate": "2011-03-01" },
+  { "title": "Stellar 16", "description": "Battle for interstellar resources", "releaseDate": "2011-04-01" },
+  { "title": "Stellar 17", "description": "Journey through a nebula", "releaseDate": "2011-05-01" },
+  { "title": "Stellar 18", "description": "Artificial intelligence in space", "releaseDate": "2011-06-01" },
+  { "title": "Stellar 19", "description": "Space pirates and smugglers", "releaseDate": "2011-07-01" },
+  { "title": "Stellar 20", "description": "Final frontier exploration", "releaseDate": "2011-08-01" }
+]

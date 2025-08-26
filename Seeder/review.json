@@ -1,0 +1,102 @@
+[
+  {
+    "rating": 4,
+    "comment": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    "movieId": "0dbdb8e0-7cbc-4cfe-92f7-1e5395d65adf"
+  },
+  {
+    "rating": 2,
+    "comment": "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    "movieId": "14bcf920-6bd1-4d42-951e-2197e83ca789"
+  },
+  {
+    "rating": 5,
+    "comment": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+    "movieId": "25aee873-5939-43b9-97af-4c1fad59bacf"
+  },
+  {
+    "rating": 3,
+    "comment": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum.",
+    "movieId": "323bcadb-2808-47aa-ab64-b461f4b02928"
+  },
+  {
+    "rating": 4,
+    "comment": "Excepteur sint occaecat cupidatat non proident, sunt in culpa.",
+    "movieId": "3854d009-db39-42b6-8710-2a9f1ef1dd39"
+  },
+  {
+    "rating": 1,
+    "comment": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    "movieId": "5426ee4c-4600-44c0-bfc9-5cf1c2a2c911"
+  },
+  {
+    "rating": 5,
+    "comment": "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    "movieId": "58f34830-07db-45ce-a6ee-b589cfc20dbf"
+  },
+  {
+    "rating": 2,
+    "comment": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+    "movieId": "5c523b8a-343d-4eda-8bc7-096c7ed2e6c5"
+  },
+  {
+    "rating": 3,
+    "comment": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum.",
+    "movieId": "75bbfa4d-b19b-4238-ac32-dc54d161115b"
+  },
+  {
+    "rating": 4,
+    "comment": "Excepteur sint occaecat cupidatat non proident, sunt in culpa.",
+    "movieId": "7b47c6e1-0db4-489a-a109-b5c3ab56a2dd"
+  },
+  {
+    "rating": 5,
+    "comment": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    "movieId": "7bf3f866-ef74-4f8a-96e8-d45d8b4dd747"
+  },
+  {
+    "rating": 1,
+    "comment": "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    "movieId": "844ddc60-b1b3-4784-82de-fe3852eebb97"
+  },
+  {
+    "rating": 3,
+    "comment": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+    "movieId": "892a6850-68a4-4d42-86ad-bd34beea35b2"
+  },
+  {
+    "rating": 2,
+    "comment": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum.",
+    "movieId": "8e6023f1-60cc-48ca-9a4c-16d010cb5895"
+  },
+  {
+    "rating": 5,
+    "comment": "Excepteur sint occaecat cupidatat non proident, sunt in culpa.",
+    "movieId": "a0c144c5-019c-4d79-b3b9-609e05787196"
+  },
+  {
+    "rating": 4,
+    "comment": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    "movieId": "a68be847-232d-4c31-b51b-c72ea8965daf"
+  },
+  {
+    "rating": 2,
+    "comment": "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    "movieId": "b8f1f1af-cf57-4bbe-8e33-ae2629b16ff5"
+  },
+  {
+    "rating": 5,
+    "comment": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+    "movieId": "c479616a-7640-4600-b499-6c550ab3ff27"
+  },
+  {
+    "rating": 3,
+    "comment": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum.",
+    "movieId": "c74525c4-640c-4933-a00d-4943f7a055f5"
+  },
+  {
+    "rating": 4,
+    "comment": "Excepteur sint occaecat cupidatat non proident, sunt in culpa.",
+    "movieId": "e827a0a9-d229-48c5-99ef-3f9fe0583ca8"
+  }
+]

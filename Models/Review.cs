@@ -7,7 +7,7 @@ namespace MovieAPI.Models
         [Key]
         public Guid Id { get; set; } = Guid.NewGuid();
 
-        [Range(0, 5, ErrorMessage = "The rating must be between 0 and 5.")]
+        [Range(1, 5, ErrorMessage = "The rating must be between 0 and 5.")]
         public int Rating { get; set; }
 
         public required string Comment { get; set; }

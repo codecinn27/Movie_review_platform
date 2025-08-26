@@ -20,10 +20,17 @@ namespace MovieAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<MovieDto>>> GetAllMovies()
+        public async Task<IActionResult> GetMovies([FromQuery] PaginationParams paginationParams)
         {
-            var movies = await _movieService.GetAllMoviesAsync();
-            return Ok(movies);
+            try
+            {
+                var result = await _movieService.GetAllMoviesAsync(paginationParams);
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, new { message = "An unexpected error occurred." });
+            }
         }
 
         // POST api/movies
