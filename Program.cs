@@ -1,41 +1,99 @@
+using Microsoft.EntityFrameworkCore;
+using MovieAPI.AppDataContext;
+using MovieAPI.Middleware;
+using MovieAPI.Interface;
+using MovieAPI.Services;
+using MovieAPI.MappingProfiles;
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
+
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+builder.Services.AddControllers();
+
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>(); // Add this line
+builder.Services.AddProblemDetails();  
+builder.Services.AddLogging();
+
+
+builder.Services.AddDbContext<MovieDbContext>(options =>
+    options.UseMySql(
+        builder.Configuration.GetSection("DbSettings:ConnectionString").Value,
+        ServerVersion.AutoDetect(builder.Configuration.GetSection("DbSettings:ConnectionString").Value)
+    )
+);
+builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IMovieService, MovieService>();
+builder.Services.AddScoped<IReviewService, ReviewService>();
+
+
+// JWT Authentication
+var key = Encoding.ASCII.GetBytes(builder.Configuration["JwtSettings:SecretKey"]);
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = false,
+        ValidateAudience = false,
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(key)
+    };
+
+    
+    options.Events = new JwtBearerEvents
+    {
+        OnForbidden = context =>
+        {
+            context.Response.StatusCode = StatusCodes.Status403Forbidden;
+            context.Response.ContentType = "application/json";
+            return context.Response.WriteAsync(
+                "{\"error\": \"Access denied. Only admin is allowed to use this route.\"}"
+            );
+        },
+        OnChallenge = context =>
+        {
+            context.HandleResponse(); // Prevent default behavior
+            context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+            context.Response.ContentType = "application/json";
+            return context.Response.WriteAsync(
+                "{\"error\": \"You must provide a valid JWT token.\"}"
+            );
+        }
+    };
+});
+
+
 
 var app = builder.Build();
+
+{
+    using var scope = app.Services.CreateScope();
+    var context = scope.ServiceProvider; 
+}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.MapOpenApi();
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
+
 
 app.UseHttpsRedirection();
 
-var summaries = new[]
-{
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
-
-app.MapGet("/weatherforecast", () =>
-{
-    var forecast =  Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
-})
-.WithName("GetWeatherForecast");
+app.UseRouting();  
+app.UseAuthorization();
+app.MapControllers();
 
 app.Run();
-
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}
